@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:proekt/theme/theme.dart';
+import 'package:proekt/theme/theme.dart'; // Импорт темы приложения
+
+import 'main_page.dart'; // Импорт главной страницы
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,7 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool isLogin = true; // Track if it's login or registration
+  bool isLogin = true; // Флаг, отслеживающий, находится ли пользователь в режиме входа или регистрации
 
   @override
   Widget build(BuildContext context) {
@@ -19,20 +21,20 @@ class _LoginPageState extends State<LoginPage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: isLogin
-                ? [DoDidDoneTheme.lightTheme.secondaryHeaderColor, DoDidDoneTheme.lightTheme.primaryColor]
-                : [DoDidDoneTheme.lightTheme.primaryColor, DoDidDoneTheme.lightTheme.secondaryHeaderColor],
-            stops: const [0.1, 0.9], // Primary color takes 90% of the space
+            colors: [
+              DoDidDoneTheme.lightTheme.colorScheme.secondary, // Вторичный цвет
+              DoDidDoneTheme.lightTheme.colorScheme.primary, // Основной цвет
+            ],
           ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center, // Расположение текста. В данном случае по центру экрана
             children: [
-              // Title
+              // Заголовок
               Text(
-                isLogin ? 'Вход' : 'Регистрация',
+                isLogin ? 'Вход' : 'Регистрация', // Заголовок меняется в зависимости от режима
                 style: const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
@@ -41,81 +43,83 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 5),
 
-              // Email Field
+              // Поле ввода электронной почты
               TextField(
                 decoration: InputDecoration(
-                  hintText: 'Логин',
-                  hintStyle: const TextStyle(color: Colors.white),
-                  filled: true,
-                  fillColor: Colors.white.withOpacity(0.2),
+                  hintText: 'Логин', // Подсказка для поля ввода
+                  hintStyle: const TextStyle(color: Colors.white), // Стиль подсказки
+                  filled: true, // Заполнить поле цветом
+                  fillColor: Colors.white.withOpacity(0.2), // Цвет заполнения
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
-                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(25), // Закругленные углы поля
+                    borderSide: BorderSide.none, // Убрать границу поля
                   ),
                 ),
               ),
               const SizedBox(height: 10),
 
-              // Password Field
+              // Поле ввода пароля
               TextField(
-                obscureText: true,
+                obscureText: true, // Скрыть текст пароля
                 decoration: InputDecoration(
-                  hintText: 'Пароль',
-                  hintStyle: const TextStyle(color: Colors.white),
-                  filled: true,
-                  fillColor: Colors.white.withOpacity(0.2),
+                  hintText: 'Пароль', // Подсказка для поля ввода
+                  hintStyle: const TextStyle(color: Colors.white), // Стиль подсказки
+                  filled: true, // Заполнить поле цветом
+                  fillColor: Colors.white.withOpacity(0.2), // Цвет заполнения
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
-                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(25), // Закругленные углы поля
+                    borderSide: BorderSide.none, // Убрать границу поля
                   ),
                 ),
               ),
               const SizedBox(height: 10),
 
-              // Repeat Password Field (Only for registration)
+              // Поле ввода пароля для подтверждения (только для регистрации)
               if (!isLogin)
                 TextField(
-                  obscureText: true,
+                  obscureText: true, // Скрыть текст пароля
                   decoration: InputDecoration(
-                    hintText: 'Повторить пароль',
-                    hintStyle: const TextStyle(color: Colors.white),
-                    filled: true,
-                    fillColor: Colors.white.withOpacity(0.2),
+                    hintText: 'Повторить пароль', // Подсказка для поля ввода
+                    hintStyle: const TextStyle(color: Colors.white), // Стиль подсказки
+                    filled: true, // Заполнить поле цветом
+                    fillColor: Colors.white.withOpacity(0.2), // Цвет заполнения
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(25), // Закругленные углы поля
+                      borderSide: BorderSide.none, // Убрать границу поля
                     ),
                   ),
                 ),
               const SizedBox(height: 10),
 
-              // Login Button
+              // Кнопка входа/регистрации
               ElevatedButton(
                 onPressed: () {
-                  // Handle login/registration logic here
+                  Navigator.pushReplacement(context,             //Переход со страницы "Логин" на главную страницу
+                      MaterialPageRoute(builder: (context) => const MainPage())); 
+                  
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                  textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  backgroundColor: Colors.white, // Цвет фона кнопки
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15), // Отступы внутри кнопки
+                  textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold), // Стиль текста кнопки
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(25), // Закругленные углы кнопки
                   ),
                 ),
-                child: Text(isLogin ? 'Войти' : 'Зарегистрироваться'),
+                child: Text(isLogin ? 'Войти' : 'Зарегистрироваться'), // Текст кнопки меняется в зависимости от режима
               ),
               const SizedBox(height: 10),
 
-              // Switch to Login/Registration
+              // Переключение между режимами входа и регистрации
               TextButton(
                 onPressed: () {
                   setState(() {
-                    isLogin = !isLogin;
+                    isLogin = !isLogin; // Изменить режим на противоположный
                   });
                 },
                 child: Text(
-                  isLogin ? 'У меня еще нет аккаунта' : 'Уже есть аккаунт',
-                  style: const TextStyle(color: Colors.white),
+                  isLogin ? 'У меня еще нет аккаунта' : 'Уже есть аккаунт', // Текст кнопки меняется в зависимости от режима
+                  style: const TextStyle(color: Colors.white), // Стиль текста кнопки
                 ),
               ),
             ],
