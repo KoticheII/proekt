@@ -57,10 +57,42 @@ class _TaskPageState extends State<TaskPage> {
       child: ListView.builder(
         itemCount: _tasks.length,
         itemBuilder: (context, index) {
-          return TaskItem(
-            title: _tasks[index]['title'],
-            description: _tasks[index]['description'],
-            deadline: _tasks[index]['deadline'], // Передаем DateTime объект
+          return Row( // Используем Row для размещения задачи и кнопок
+            children: [
+              Expanded( // Задача занимает большую часть строки
+                child: TaskItem(
+                  title: _tasks[index]['title'],
+                  description: _tasks[index]['description'],
+                  deadline: _tasks[index]['deadline'], // Передаем DateTime объект
+                ),
+              ),
+              SizedBox(width: 1), // Отступ между задачей и кнопками
+              Column( // Колонка для кнопок
+                mainAxisSize: MainAxisSize.min, // Минимальный размер колонки
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      // Обработка нажатия на кнопку "Редактировать"
+                      // Например, можно открыть диалог для редактирования задачи
+                      print('Редактировать задачу ${_tasks[index]['title']}');
+                    },
+                    icon: const Icon(Icons.edit),
+                  ),
+                  SizedBox(height: 8), // Отступ между кнопками
+                  IconButton(
+                    onPressed: () {
+                      // Обработка нажатия на кнопку "Удалить"
+                      // Например, можно удалить задачу из списка
+                      setState(() {
+                        _tasks.removeAt(index);
+                      });
+                    },
+                    icon: const Icon(Icons.delete),
+                    color: Colors.red, // Красный цвет для иконки удаления
+                  ),
+                ],
+              ),
+            ],
           );
         },
       ),
