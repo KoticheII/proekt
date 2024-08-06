@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // Импортируем пакет intl
 
 import '../widgets/task_item.dart';
+import '../theme/theme.dart'; // Импортируем DoDidDoneTheme
 
 class TaskPage extends StatefulWidget {
   const TaskPage({Key? key}) : super(key: key);
@@ -41,11 +42,19 @@ class _TaskPageState extends State<TaskPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( // Добавляем Scaffold для отображения страницы
-      appBar: AppBar(
-        title: const Text('Задачи'),
+    return Container( // Используем Container вместо Scaffold
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft, // Направление распространения градиента
+          end: Alignment.bottomCenter,
+          colors: [
+            DoDidDoneTheme.lightTheme.colorScheme.secondary, // Добавляем вторичный цвет
+            DoDidDoneTheme.lightTheme.colorScheme.primary, // Добавляем основной цвет
+          ],
+          stops: const [0.1, 0.9], // Основной цвет занимает 90%
+        ),
       ),
-      body: ListView.builder(
+      child: ListView.builder(
         itemCount: _tasks.length,
         itemBuilder: (context, index) {
           return TaskItem(
