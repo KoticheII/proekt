@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../screens/profile.dart';
 import '../theme/theme.dart';
-//import 'profile_page.dart'; // Импортируем profile_page
+import '../screens/all_tasks.dart'; // Импортируем TaskPage
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    const Center(child: Text('Задачи')),
+    TaskPage(), // Добавляем TaskPage в список экранов
     const Center(child: Text('Сегодня')),
     ProfilePage(), // Заменяем Center на ProfilePage
     const Center(child: Text('Выполнено')),
