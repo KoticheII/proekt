@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:proekt/theme/theme.dart'; // Импорт темы приложения
+
+import '../theme/theme.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -11,46 +12,47 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text('Задачи'),
-    Text('Сегодня'),
-    Text('Профиль'),
-    Text('Выполнено'),
+  final List<Widget> _screens = [
+    const Center(child: Text('Задачи')),
+    const Center(child: Text('Сегодня')),
+    const Center(child: Text('Профиль')),
+    const Center(child: Text('Выполнено')),
   ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,  //Фон уходит в самый верх экрана
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: Colors.transparent, // Прозрачный AppBar
+        elevation: 0, // Убираем тень
       ),
-      body: Container( // Добавляем Container для градиента
+      body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
+            begin: Alignment.topLeft, // Направление распространения градиента
             end: Alignment.bottomCenter,
             colors: [
-              DoDidDoneTheme.lightTheme.colorScheme.secondary, // Вторичный цвет
-              DoDidDoneTheme.lightTheme.colorScheme.primary, // Основной цвет
+              DoDidDoneTheme.lightTheme.colorScheme.secondary,
+              DoDidDoneTheme.lightTheme.colorScheme.primary,
             ],
+            stops: const [0.1, 0.9], // Основной цвет занимает 90%
           ),
         ),
-        child: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
+        child: _screens[_selectedIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        backgroundColor: Colors.transparent, // Прозрачный BottomNavigationBar
+        elevation: 0, // Убираем тень
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.task),
+            icon: Icon(Icons.task_alt),
             label: 'Задачи',
           ),
           BottomNavigationBarItem(
@@ -66,8 +68,6 @@ class _MainPageState extends State<MainPage> {
             label: 'Выполнено',
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
       ),
     );
   }

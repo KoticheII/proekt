@@ -1,25 +1,32 @@
 import 'package:flutter/material.dart';
+
 class DoDidDoneTheme {
   static ThemeData lightTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color(0xFF9f7bf6), // Primary color
-      primary: const Color(0xFF9f7bf6), // Primary color
-      secondary: const Color(0xFF4ceb8b), // Secondary color
+      seedColor: const Color(0xFF9f7bf6), // Основной цвет
+      brightness: Brightness.light,
+      primary: const Color(0xFF9F7BF6),  // Основной цвет
+      secondary: const Color(0xFF4ceb8b),  // Вторичный цвет
     ),
     useMaterial3: true,
     // Добавляем стиль для кнопок
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        textStyle: MaterialStateProperty.all<TextStyle>(
-          const TextStyle(color: Colors.white), // Текст кнопок белый
+        backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF9F7BF6)), // Устанавливаем цвет фона кнопки
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Устанавливаем белый цвет для текста и иконок
+        textStyle: MaterialStateProperty.all(
+          const TextStyle(color: Colors.white), // Устанавливаем белый цвет текста в кнопке
         ),
       ),
     ),
-     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      selectedItemColor: const Color(0xFF9f7bf6), // Цвет выбранной иконки
-      unselectedItemColor:
-          const Color(0xFF4ceb8b).withOpacity(0.5), // Цвет невыбранной иконки
-      backgroundColor: Colors.transparent, // Прозрачный фон
-      ),
+    // Настройки цвета меню
+    bottomNavigationBarTheme: BottomNavigationBarThemeData( 
+      backgroundColor: Colors.transparent, // Прозрачный BottomNavigationBar
+      //elevation: 0, // Убираем тень
+      selectedItemColor: const Color(0xFF9F7BF6), // Основной цвет для выбранных иконок
+      unselectedItemColor: Colors.grey, // Серый цвет для невыбранных иконок
+    ),
   );
 }
+  
+
