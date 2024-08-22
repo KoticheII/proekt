@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Импортируем пакет intl
+// Импортируем пакет intl
 
 import '../widgets/task_item.dart';
 import '../theme/theme.dart'; // Импортируем DoDidDoneTheme
 
 class TaskPage extends StatefulWidget {
-  const TaskPage({Key? key}) : super(key: key);
+  const TaskPage({super.key});
 
   @override
   State<TaskPage> createState() => _TaskPageState();
@@ -66,7 +66,7 @@ class _TaskPageState extends State<TaskPage> {
                   deadline: _tasks[index]['deadline'], // Передаем DateTime объект
                 ),
               ),
-              SizedBox(width: 1), // Отступ между задачей и кнопками
+              const SizedBox(width: 1), // Отступ между задачей и кнопками
               Column( // Колонка для кнопок
                 mainAxisSize: MainAxisSize.min, // Минимальный размер колонки
                 children: [
@@ -78,7 +78,7 @@ class _TaskPageState extends State<TaskPage> {
                     },
                     icon: const Icon(Icons.edit),
                   ),
-                  SizedBox(height: 8), // Отступ между кнопками
+                  const SizedBox(height: 8), // Отступ между кнопками
                   IconButton(
                     onPressed: () {
                       // Обработка нажатия на кнопку "Удалить"

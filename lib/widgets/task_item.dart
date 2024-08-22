@@ -7,11 +7,11 @@ class TaskItem extends StatelessWidget {
   final DateTime deadline; // Используем DateTime для дедлайна
 
   const TaskItem({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
     required this.deadline,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

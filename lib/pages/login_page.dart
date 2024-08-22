@@ -4,7 +4,7 @@ import 'main_page.dart';
 import '../services/firebase_auth.dart'; // Импортируем AuthenticationService
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();

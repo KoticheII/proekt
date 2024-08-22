@@ -12,18 +12,18 @@ class DoDidDoneTheme {
     // Добавляем стиль для кнопок
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF9F7BF6)), // Устанавливаем цвет фона кнопки
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Устанавливаем белый цвет для текста и иконок
-        textStyle: MaterialStateProperty.all(
+        backgroundColor: WidgetStateProperty.all<Color>(const Color(0xFF9F7BF6)), // Устанавливаем цвет фона кнопки
+        foregroundColor: WidgetStateProperty.all<Color>(Colors.white), // Устанавливаем белый цвет для текста и иконок
+        textStyle: WidgetStateProperty.all(
           const TextStyle(color: Colors.white), // Устанавливаем белый цвет текста в кнопке
         ),
       ),
     ),
     // Настройки цвета меню
-    bottomNavigationBarTheme: BottomNavigationBarThemeData( 
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData( 
       backgroundColor: Colors.transparent, // Прозрачный BottomNavigationBar
       //elevation: 0, // Убираем тень
-      selectedItemColor: const Color(0xFF9F7BF6), // Основной цвет для выбранных иконок
+      selectedItemColor: Color(0xFF9F7BF6), // Основной цвет для выбранных иконок
       unselectedItemColor: Colors.grey, // Серый цвет для невыбранных иконок
     ),
   );

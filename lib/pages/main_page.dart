@@ -4,7 +4,7 @@ import '../theme/theme.dart';
 import '../screens/all_tasks.dart'; // Импортируем TaskPage
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -14,17 +14,17 @@ class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    TaskPage(), // Добавляем TaskPage в список экранов
+    const TaskPage(), // Добавляем TaskPage в список экранов
     const Center(child: Text('Сегодня')),
-    ProfilePage(), // Заменяем Center на ProfilePage
+    const ProfilePage(), // Заменяем Center на ProfilePage
     const Center(child: Text('Выполнено')),
   ];
 
   // Функция для показа диалогового окна
   void _showAddTaskDialog() {
     // Создаем контроллеры для полей ввода
-    final _nameController = TextEditingController();
-    final _descriptionController = TextEditingController();
+    final nameController = TextEditingController();
+    final descriptionController = TextEditingController();
 
     showDialog(
       context: context,
@@ -37,12 +37,12 @@ class _MainPageState extends State<MainPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
-                  controller: _nameController,
+                  controller: nameController,
                   decoration: const InputDecoration(hintText: 'Название задачи'),
                 ),
                 const SizedBox(height: 16),
                 TextField(
-                  controller: _descriptionController,
+                  controller: descriptionController,
                   decoration: const InputDecoration(hintText: 'Описание'),
                 ),
                 const SizedBox(height: 24),
