@@ -25,8 +25,6 @@ class _MainPageState extends State<MainPage> {
     // Создаем контроллеры для полей ввода
     final _nameController = TextEditingController();
     final _descriptionController = TextEditingController();
-    final _deadlineController = TextEditingController();
-    DateTime? _selectedDateTime; // Переменная для хранения выбранной даты и времени
 
     showDialog(
       context: context,
@@ -47,44 +45,14 @@ class _MainPageState extends State<MainPage> {
                   controller: _descriptionController,
                   decoration: const InputDecoration(hintText: 'Описание'),
                 ),
-                const SizedBox(height: 16),
-                // Используем InkWell для выбора даты и времени
-                InkWell(
-                  onTap: () async {
-                    // Открываем диалог выбора даты и времени
-                    _selectedDateTime = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(const Duration(days: 365)),
-                    );
-                    if (_selectedDateTime != null) {
-                      // Если дата выбрана, открываем диалог выбора времени
-                      TimeOfDay? selectedTime = await showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay.now(),
-                      );
-                      if (selectedTime != null) {
-                        // Соединяем выбранную дату и время
-                        _selectedDateTime = DateTime(
-                          _selectedDateTime!.year,
-                          _selectedDateTime!.month,
-                          _selectedDateTime!.day,
-                          selectedTime.hour,
-                          selectedTime.minute,
-                        );
-                        // Обновляем контроллер для отображения выбранной даты и времени
-                        _deadlineController.text =
-                            _selectedDateTime!.toString();
-                      }
-                    }
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: () {
+                    // Обработка данных задачи
+                    // ...
+                    Navigator.of(context).pop(); // Закрытие диалогового окна
                   },
-                  child: InputDecorator(
-                    decoration: const InputDecoration(hintText: 'Дедлайн'),
-                    child: Text(_deadlineController.text.isEmpty
-                        ? 'Выберите дату и время'
-                        : _deadlineController.text),
-                  ),
+                  child: const Text('Добавить'),
                 ),
               ],
             ),
@@ -144,10 +112,13 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddTaskDialog, // Вызываем диалоговое окно при нажатии
-        child: const Icon(Icons.add),
-      ),
+      // Условие для показа FloatingActionButton
+      floatingActionButton: _selectedIndex == 0 
+          ? FloatingActionButton(
+              onPressed: _showAddTaskDialog,
+              child: const Icon(Icons.add),
+            ) 
+          : null,
     );
   }
 }
